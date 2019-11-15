@@ -1,13 +1,14 @@
 ﻿using System;
+using SQLite;
 using Xamarin.Forms;
 
 namespace ImagePicker.Models
 {
     public class Photo
     {
-        public string Id { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public string Path { get; set; }
-        public Image Source { get; set; }
-
+        public byte[] PhotoData  { get; set; }
     }
 }

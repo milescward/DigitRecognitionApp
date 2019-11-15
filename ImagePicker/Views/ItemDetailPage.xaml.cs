@@ -5,7 +5,8 @@ using Xamarin.Forms.Xaml;
 
 using ImagePicker.Models;
 using ImagePicker.ViewModels;
-
+using System.IO;
+using ImagePicker.Services;
 
 namespace ImagePicker.Views
 {
@@ -31,6 +32,32 @@ namespace ImagePicker.Views
 
             viewModel = new ItemDetailViewModel();
             BindingContext = viewModel;
+        }
+
+        async void Save_Clicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "AddPhoto", viewModel.Photo);
+            await Navigation.PopModalAsync();
+        }
+
+        async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
+        }
+
+        async void OnPickPhotoButtonClicked(object sender, EventArgs e)
+        {
+            (sender as Button).IsEnabled = false;
+
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
+            {
+                image.Source = ImageSource.FromStream(() => stream);
+            }
+
+            (sender as Button).IsEnabled = true;
+
+
         }
     }
 }

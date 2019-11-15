@@ -61,11 +61,10 @@ namespace ImagePicker.Services.Data
             throw new NotImplementedException();
         }
 
-        Task<IList<Photo>> ILocalDataService.GetAllPhotosAsync()
+        Task<IEnumerable<Photo>> ILocalDataService.GetAllPhotosAsync()
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

@@ -30,27 +30,13 @@ namespace ImagePicker.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", photo);
+            MessagingCenter.Send(this, "AddPhoto", photo);
             await Navigation.PopModalAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();
-        }
-
-        async void OnPickPhotoButtonClicked(object sender, EventArgs e)
-        {
-            (sender as Button).IsEnabled = false;
-
-            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
-            {
-
-                image.Source = ImageSource.FromStream(() => stream);
-            }
-
-            (sender as Button).IsEnabled = true;
         }
     }
 }

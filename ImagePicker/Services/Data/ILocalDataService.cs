@@ -11,6 +11,6 @@ namespace ImagePicker.Services.Data
         Task<bool> AddPhotoAsync(Photo photo);
         Task<Photo> GetPhotoAsync();
         void DeletePhotoAsync();
-        Task<IList<Photo>> GetAllPhotosAsync();
+        Task<IEnumerable<Photo>> GetAllPhotosAsync();
     }
 }

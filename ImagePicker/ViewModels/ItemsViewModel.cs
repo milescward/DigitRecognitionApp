@@ -13,7 +13,7 @@ namespace ImagePicker.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.Photo> Images { get; set; }
+        public ObservableCollection<Photo> Images { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()

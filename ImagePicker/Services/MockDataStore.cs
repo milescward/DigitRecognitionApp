@@ -39,7 +39,7 @@ namespace ImagePicker.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var oldItem = items.Where((Photo arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
@@ -47,7 +47,7 @@ namespace ImagePicker.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Photo> GetItemAsync(string id)
+        public async Task<Photo> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }

@@ -14,8 +14,7 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-                <Button Text="Pick Photo"
-                        Clicked="OnPickPhotoButtonClicked" />
+                <Button Text="Pick Photo"/>
             <Image x:Name="image"/>
         </StackLayout>
     </ContentPage.Content>

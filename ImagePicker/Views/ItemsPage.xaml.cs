@@ -29,7 +29,7 @@ namespace ImagePicker.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Models.Photo;
+            var item = args.SelectedItem as Photo;
             if (item == null)
                 return;
 
@@ -41,7 +41,7 @@ namespace ImagePicker.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewItemPage());
+            await Navigation.PushAsync(new ItemDetailPage());
         }
 
         protected override void OnAppearing()
