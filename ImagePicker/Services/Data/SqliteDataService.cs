@@ -4,6 +4,7 @@ using System.IO;
 using ImagePicker.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ImagePicker.Services.Data
 {
@@ -25,19 +26,46 @@ namespace ImagePicker.Services.Data
             _database.CreateTable<Photo>();
         }
 
-        public async void AddPhoto(Photo photo)
+        //public void AddPhoto(Photo photo)
+        //{
+            
+        //}
+
+        //public void DeletePhoto()
+        //{
+        //    _database.Execute("DELETE FROM Photo");
+        //}
+
+        //public Photo GetPhoto()
+        //{
+        //    return _database.Table<Photo>().FirstOrDefault();
+        //}
+
+        //public IList<Photo> GetAllPhotosAsync()
+        //{
+        //    return _database.
+        //}
+
+        public Task<bool> AddPhotoAsync(Photo photo)
         {
-            _database.Insert(photo);
+            throw new NotImplementedException();
         }
 
-        public void DeletePhoto()
+        public Task<Photo> GetPhotoAsync()
         {
-            _database.Execute("DELETE FROM Photo");
+            throw new NotImplementedException();
         }
 
-        public async Task<Photo> GetPhoto()
+        public void DeletePhotoAsync()
         {
-            return _database.Table<Photo>().FirstOrDefault();
+            throw new NotImplementedException();
         }
+
+        Task<IList<Photo>> ILocalDataService.GetAllPhotosAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

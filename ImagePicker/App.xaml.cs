@@ -5,6 +5,7 @@ using ImagePicker.Services;
 using ImagePicker.Views;
 using ImagePicker.Services.Data;
 
+
 namespace ImagePicker
 {
     public partial class App : Application
@@ -14,15 +15,8 @@ namespace ImagePicker
         {
             InitializeComponent();
 
-            InitApp();
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<IPhotoPickerService>();
             MainPage = new MainPage();
-        }
-
-        private void InitApp()
-        {
-            var dataService = new SqliteDataService();
-            dataService.Initialize();
         }
 
         protected override void OnStart ()

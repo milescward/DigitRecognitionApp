@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace ImagePicker.Models
 {
@@ -6,5 +7,7 @@ namespace ImagePicker.Models
     {
         public string Id { get; set; }
         public string Path { get; set; }
+        public Image Source { get; set; }
+
     }
 }
