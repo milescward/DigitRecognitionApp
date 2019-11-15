@@ -8,9 +8,9 @@ namespace ImagePicker.Services.Data
     public interface ILocalDataService
     {
         void Initialize();
-        Task<bool> AddPhotoAsync(Photo photo);
-        Task<Photo> GetPhotoAsync();
+        Task<bool> AddPhotoAsync(ViewImage photo);
+        Task<ViewImage> GetPhotoAsync();
         void DeletePhotoAsync();
-        Task<IEnumerable<Photo>> GetAllPhotosAsync();
+        Task<IEnumerable<ViewImage>> GetAllPhotosAsync();
     }
 }

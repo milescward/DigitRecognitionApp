@@ -1,15 +1,15 @@
 ﻿using System;
-
-using ImagePicker.Models;
+using Xamarin.Forms;
 
 namespace ImagePicker.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Photo Photo { get; set; }
-        public ItemDetailViewModel(Photo photo = null)
+        public Image ViewImage { get; set; }
+        public Image Photo { get; set; }
+        public ItemDetailViewModel(Image image = null)
         {
-            Photo = photo;
+            ViewImage = image;
         }
     }
 }

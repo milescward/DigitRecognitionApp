@@ -23,7 +23,7 @@ namespace ImagePicker.Services.Data
             }
 
             // Create a table for a specific model
-            _database.CreateTable<Photo>();
+            _database.CreateTable<ViewImage>();
         }
 
         //public void AddPhoto(Photo photo)
@@ -46,12 +46,12 @@ namespace ImagePicker.Services.Data
         //    return _database.
         //}
 
-        public Task<bool> AddPhotoAsync(Photo photo)
+        public Task<bool> AddPhotoAsync(ViewImage image)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Photo> GetPhotoAsync()
+        public Task<ViewImage> GetPhotoAsync()
         {
             throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace ImagePicker.Services.Data
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Photo>> ILocalDataService.GetAllPhotosAsync()
+        Task<IEnumerable<ViewImage>> ILocalDataService.GetAllPhotosAsync()
         {
             throw new NotImplementedException();
         }

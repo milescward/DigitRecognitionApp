@@ -36,7 +36,7 @@ namespace ImagePicker.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddPhoto", viewModel.Photo);
+            MessagingCenter.Send(this, "AddPhoto", viewModel.ViewImage);
             await Navigation.PopModalAsync();
         }
 
@@ -55,9 +55,9 @@ namespace ImagePicker.Views
                 image.Source = ImageSource.FromStream(() => stream);
             }
 
+            viewModel.ViewImage = image;
+
             (sender as Button).IsEnabled = true;
-
-
         }
     }
 }

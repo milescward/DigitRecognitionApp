@@ -29,7 +29,7 @@ namespace ImagePicker.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Photo;
+            var item = args.SelectedItem as ViewImage;
             if (item == null)
                 return;
 

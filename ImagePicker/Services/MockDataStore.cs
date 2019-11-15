@@ -6,13 +6,13 @@ using ImagePicker.Models;
 
 namespace ImagePicker.Services
 {
-    public class MockDataStore : IDataStore<Photo>
+    public class MockDataStore : IDataStore<ViewImage>
     {
-        readonly List<Photo> items;
+        readonly List<ViewImage> items;
 
         public MockDataStore()
         {
-            items = new List<Photo>()
+            items = new List<ViewImage>()
             {
                 //new Photo { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
                 //new Photo { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
@@ -23,16 +23,16 @@ namespace ImagePicker.Services
             };
         }
 
-        public async Task<bool> AddItemAsync(Photo item)
+        public async Task<bool> AddItemAsync(ViewImage item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Photo item)
+        public async Task<bool> UpdateItemAsync(ViewImage item)
         {
-            var oldItem = items.Where((Photo arg) => arg.Id == item.Id).FirstOrDefault();
+            var oldItem = items.Where((ViewImage arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(oldItem);
             items.Add(item);
 
@@ -41,18 +41,18 @@ namespace ImagePicker.Services
 
         public async Task<bool> DeleteItemAsync(int id)
         {
-            var oldItem = items.Where((Photo arg) => arg.Id == id).FirstOrDefault();
+            var oldItem = items.Where((ViewImage arg) => arg.IDnum == id).FirstOrDefault();
             items.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Photo> GetItemAsync(int id)
+        public async Task<ViewImage> GetItemAsync(int id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(items.FirstOrDefault(s => s.IDnum == id));
         }
 
-        public async Task<IEnumerable<Photo>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<ViewImage>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

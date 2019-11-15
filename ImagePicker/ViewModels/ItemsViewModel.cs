@@ -5,28 +5,27 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-using ImagePicker.Models;
 using ImagePicker.Views;
-using Photo = ImagePicker.Models.Photo;
+using ImagePicker.Models;
 
 namespace ImagePicker.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Photo> Images { get; set; }
+        public ObservableCollection<ViewImage> Images { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Id = "Images";
-            Images = new ObservableCollection<Photo>();
+            Images = new ObservableCollection<ViewImage>();
             LoadItemsCommand = new Command(async () =>
             await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Photo>
+            MessagingCenter.Subscribe<NewItemPage, ViewImage>
                 (this, "AddImage", async (obj, item) =>
             {
-                var newImage = item as Photo;
+                var newImage = item as ViewImage;
                 Images.Add(newImage);
                 await DataStore.AddItemAsync(newImage);
             });
