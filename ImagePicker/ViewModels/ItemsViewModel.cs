@@ -7,25 +7,28 @@ using Xamarin.Forms;
 
 using ImagePicker.Models;
 using ImagePicker.Views;
+using Photo = ImagePicker.Models.Photo;
 
 namespace ImagePicker.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Models.Photo> Images { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Id = "Images";
+            Images = new ObservableCollection<Photo>();
+            LoadItemsCommand = new Command(async () =>
+            await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, Photo>
+                (this, "AddImage", async (obj, item) =>
             {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                var newImage = item as Photo;
+                Images.Add(newImage);
+                await DataStore.AddItemAsync(newImage);
             });
         }
 
@@ -38,11 +41,11 @@ namespace ImagePicker.ViewModels
 
             try
             {
-                Items.Clear();
+                Images.Clear();
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    Images.Add(item);
                 }
             }
             catch (Exception ex)

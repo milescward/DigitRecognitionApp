@@ -6,11 +6,10 @@ namespace ImagePicker.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Photo Photo { get; set; }
+        public ItemDetailViewModel(Photo photo = null)
         {
-            Title = item?.Text;
-            Item = item;
+            Photo = photo;
         }
     }
 }

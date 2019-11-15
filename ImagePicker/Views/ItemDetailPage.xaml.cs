@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 using ImagePicker.Models;
 using ImagePicker.ViewModels;
 
+
 namespace ImagePicker.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -19,6 +20,7 @@ namespace ImagePicker.Views
         {
             InitializeComponent();
 
+
             BindingContext = this.viewModel = viewModel;
         }
 
@@ -26,13 +28,8 @@ namespace ImagePicker.Views
         {
             InitializeComponent();
 
-            var item = new Item
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel();
             BindingContext = viewModel;
         }
     }

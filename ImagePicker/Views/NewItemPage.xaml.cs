@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using ImagePicker.Models;
+using ImagePicker.ViewModels;
 
 namespace ImagePicker.Views
 {
@@ -13,24 +14,20 @@ namespace ImagePicker.Views
     [DesignTimeVisible (false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public ItemDetailViewModel viewModel;
+
+        public Photo Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
-
-            BindingContext = this;
+            BindingContext = viewModel;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", (Models.Photo)Item);
             await Navigation.PopModalAsync();
         }
 

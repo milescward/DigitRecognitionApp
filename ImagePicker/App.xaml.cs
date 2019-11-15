@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ImagePicker.Services;
 using ImagePicker.Views;
+using ImagePicker.Services.Data;
 
 namespace ImagePicker
 {
@@ -13,8 +14,15 @@ namespace ImagePicker
         {
             InitializeComponent();
 
+            InitApp();
             DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
+        }
+
+        private void InitApp()
+        {
+            var dataService = new SqliteDataService();
+            dataService.Initialize();
         }
 
         protected override void OnStart ()

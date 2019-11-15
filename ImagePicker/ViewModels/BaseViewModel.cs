@@ -12,7 +12,7 @@ namespace ImagePicker.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Models.Photo> DataStore => DependencyService.Get<IDataStore<Models.Photo>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -22,7 +22,7 @@ namespace ImagePicker.ViewModels
         }
 
         string title = string.Empty;
-        public string Title
+        public string Id
         {
             get { return title; }
             set { SetProperty(ref title, value); }
