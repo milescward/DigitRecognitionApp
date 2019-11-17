@@ -13,7 +13,27 @@ namespace ImagePicker.iOS.Services
     public class PhotoPickerService : IPhotoPickerService
     {
         TaskCompletionSource<Stream> taskCompletionSource;
+        TaskCompletionSource<string> stringTaskCompletionSource;
         UIImagePickerController imagePicker;
+
+        public Task<string> ReturnFilePathAsync()
+        {
+            imagePicker = new UIImagePickerController
+            {
+                SourceType = UIImagePickerControllerSourceType.PhotoLibrary,
+                MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary)
+            };
+
+            imagePicker.FinishedPickingMedia += OnImagePickerFinished;
+            imagePicker.Canceled += OnImagePickerCancelled;
+
+            UIWindow window = UIApplication.SharedApplication.KeyWindow;
+            var viewController = window.RootViewController;
+            viewController.PresentModalViewController(imagePicker, true);
+
+            stringTaskCompletionSource = new TaskCompletionSource<string>();
+            return stringTaskCompletionSource.Task;
+        }
 
         public Task<Stream> GetImageStreamAsync()
         {
@@ -36,6 +56,26 @@ namespace ImagePicker.iOS.Services
             // Return Task object
             taskCompletionSource = new TaskCompletionSource<Stream>();
             return taskCompletionSource.Task;
+        }
+
+        void OnImagePickerFinished(object sender, UIImagePickerMediaPickedEventArgs args)
+        {
+            UIImage image = args.EditedImage ?? args.OriginalImage;
+
+
+            if (image != null)
+            {
+
+                var url = (NSUrl)args.Info.ValueForKey(new NSString("UIImagePickerControllerImageURL"));
+
+
+                stringTaskCompletionSource.SetResult(url.Path);
+            }
+            else
+            {
+                stringTaskCompletionSource.SetResult(null);
+            }
+            imagePicker.DismissModalViewController(true);
         }
 
         void OnImagePickerFinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs args)

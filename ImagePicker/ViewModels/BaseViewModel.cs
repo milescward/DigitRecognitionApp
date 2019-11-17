@@ -7,12 +7,16 @@ using Xamarin.Forms;
 
 using ImagePicker.Models;
 using ImagePicker.Services;
+using ImagePicker.Services.Data;
 
 namespace ImagePicker.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<ViewImage> DataStore => DependencyService.Get<IDataStore<ViewImage>>();
+        string dbPath => FileAccessHelper.GetLocalFilePath("ViewImages.db3");
+
+        public ILocalDataService VIRepo =>
+            DependencyService.Get<ILocalDataService>() ?? new ViewImageRepository(dbPath);
 
         bool isBusy = false;
         public bool IsBusy

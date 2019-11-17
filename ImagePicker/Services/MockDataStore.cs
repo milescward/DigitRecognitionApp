@@ -6,7 +6,7 @@ using ImagePicker.Models;
 
 namespace ImagePicker.Services
 {
-    public class MockDataStore : IDataStore<ViewImage>
+    public class MockDataStore : ILocalDataService<ViewImage>
     {
         readonly List<ViewImage> items;
 
@@ -14,12 +14,12 @@ namespace ImagePicker.Services
         {
             items = new List<ViewImage>()
             {
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                //new Photo { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
+                //new ViewImage { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
             };
         }
 

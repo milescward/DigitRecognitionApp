@@ -1,10 +1,7 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 using ImagePicker.Services;
 using ImagePicker.Views;
 using ImagePicker.Services.Data;
-
 
 namespace ImagePicker
 {
@@ -14,7 +11,6 @@ namespace ImagePicker
         public App ()
         {
             InitializeComponent();
-
             DependencyService.Register<IPhotoPickerService>();
             MainPage = new MainPage();
         }

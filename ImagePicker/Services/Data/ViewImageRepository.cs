@@ -1,51 +1,41 @@
 ﻿using System;
 using SQLite;
-using System.IO;
 using ImagePicker.Models;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace ImagePicker.Services.Data
 {
     public class ViewImageRepository : ILocalDataService
     {
-        private SQLiteConnection _database;
+        private SQLiteAsyncConnection _database;
         public string StatusMessage { get; set; }
 
-        public void Initialize()
+        public ViewImageRepository(string dbPath)
         {
-            // Create the database if it doesn't exist.
-            if (_database == null)
-            {
-                var libFolder = FileSystem.AppDataDirectory;
-                _database = new SQLiteConnection(libFolder);
-            }
-
-            // Create a table for a specific model
-            _database.CreateTable<ViewImage>();
+            _database = new SQLiteAsyncConnection(dbPath);
+            _database.CreateTableAsync<ViewImage>();
         }
 
-        public void AddImageAsync(ViewImage image)
+        public async Task AddImageAsync(ViewImage image)
         {
             try
             {
-                _database.Insert(image);
+                await _database.InsertAsync(image);
             }
             catch (Exception ex)
             {
                 StatusMessage =
                     $"Error occurred, image {image} was not saved {ex.Message}";
             }
-
         }
 
-        public IEnumerable<ViewImage> GetAllImagesAsync()
+        public async Task<IEnumerable<ViewImage>> GetAllImagesAsync()
         {
             try
             {
-                return _database.Table<ViewImage>().ToList();
+                return await _database.Table<ViewImage>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -55,12 +45,13 @@ namespace ImagePicker.Services.Data
             return new List<ViewImage>();
         }
 
-        public ViewImage GetImageAsync(int id)
+        public async Task<ViewImage> GetImageAsync(int id)
         {
             var image = _database.Table<ViewImage>()
-                        .Where(i => i.IDnum == id);
+                        .Where(i => i.IDnum == id)
+                        .FirstOrDefaultAsync();
 
-            return image.FirstOrDefault();
+            return await image;
         }
     }
 }

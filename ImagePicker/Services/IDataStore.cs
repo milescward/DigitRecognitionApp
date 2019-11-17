@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace ImagePicker.Services
 {
-    public interface IDataStore<ViewImage>
+    public interface ILocalDataService<ViewImage>
     {
         Task<bool> AddItemAsync(ViewImage image);
         Task<bool> UpdateItemAsync(ViewImage image);

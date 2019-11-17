@@ -22,13 +22,11 @@ namespace ImagePicker.ViewModels
             LoadItemsCommand = new Command(async () =>
             await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, ViewImage>
-                (this, "AddImage", async (obj, item) =>
-            {
-                var newImage = item as ViewImage;
-                Images.Add(newImage);
-                await DataStore.AddItemAsync(newImage);
-            });
+            MessagingCenter.Subscribe<ItemDetailPage, ViewImage>
+                (this, "SaveImage", async (sender, image) => {
+                    Images.Add(image);
+                    await VIRepo.AddImageAsync(image);
+                });
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -41,7 +39,7 @@ namespace ImagePicker.ViewModels
             try
             {
                 Images.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await VIRepo.GetAllImagesAsync();
                 foreach (var item in items)
                 {
                     Images.Add(item);

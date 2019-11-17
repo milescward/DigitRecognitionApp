@@ -21,7 +21,6 @@ namespace ImagePicker.Views
         {
             InitializeComponent();
 
-
             BindingContext = this.viewModel = viewModel;
         }
 
@@ -29,15 +28,14 @@ namespace ImagePicker.Views
         {
             InitializeComponent();
 
-
             viewModel = new ItemDetailViewModel();
             BindingContext = viewModel;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddPhoto", viewModel.ViewImage);
-            await Navigation.PopModalAsync();
+            MessagingCenter.Send(this, "SaveImage", viewModel.VMimage);
+            await Navigation.PopToRootAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
@@ -54,8 +52,6 @@ namespace ImagePicker.Views
             {
                 image.Source = ImageSource.FromStream(() => stream);
             }
-
-            viewModel.ViewImage = image;
 
             (sender as Button).IsEnabled = true;
         }

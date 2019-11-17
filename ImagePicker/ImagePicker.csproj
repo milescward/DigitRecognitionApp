@@ -18,5 +18,6 @@
   <ItemGroup>
     <Compile Remove="ViewModels\LocatorViewModel.cs" />
     <Compile Remove="Services\NativeServices\PhotoPickerService.cs" />
+    <Compile Remove="Services\Data\SqliteDataService.cs" />
   </ItemGroup>
 </Project>
