@@ -26,6 +26,7 @@ namespace ImagePicker.ViewModels
                 (this, "SaveImage", async (sender, image) => {
                     Images.Add(image);
                     await VIRepo.AddImageAsync(image);
+                    await ExecuteLoadItemsCommand();
                 });
         }
 

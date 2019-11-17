@@ -5,7 +5,8 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:ImagePicker.Views"
-            x:Class="ImagePicker.Views.MainPage">
+            x:Class="ImagePicker.Views.MainPage"
+            BackgroundColor="White">
 
     <MasterDetailPage.Master>
         <views:MenuPage />

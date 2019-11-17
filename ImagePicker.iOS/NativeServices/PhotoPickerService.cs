@@ -112,7 +112,7 @@ namespace ImagePicker.iOS.Services
         void OnImagePickerCancelled(object sender, EventArgs args)
         {
             UnregisterEventHandlers();
-            taskCompletionSource.SetResult(null);
+            //taskCompletionSource.SetResult(null);
             imagePicker.DismissModalViewController(true);
         }
 

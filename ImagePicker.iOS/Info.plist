@@ -42,5 +42,7 @@
 	<string></string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need Camera Access</string>
 </dict>
 </plist>

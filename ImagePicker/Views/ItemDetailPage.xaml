@@ -11,12 +11,32 @@
     <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
     <ToolbarItem Text="Save" Clicked="Save_Clicked" />
 </ContentPage.ToolbarItems>
-    <StackLayout Spacing="20" Padding="25">
-        <Button Text="Pick Photo"
-            Clicked="OnPickPhotoButtonClicked"/>
-        <Image x:Name="image"
-               HeightRequest="200"/>
-        <Button Text="Convert to text"
-                Clicked="OnConvertToTextClicked"/>
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="25">
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Take Photo"
+                        BorderWidth="1"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="LightGray"
+                        Clicked="OnTakeImageButtonClicked"/>
+                <Button Text="Pick Photo"
+                        HorizontalOptions="FillAndExpand"
+                        BorderWidth="1"
+                        BackgroundColor="LightGray"
+                        Clicked="OnChooseImageButtonClicked"/>
+            </StackLayout>
+            <Image  x:Name="image"
+                    VerticalOptions="FillAndExpand"/>
+            <Button Text="Convert to text"
+                    BorderWidth="1"
+                    BackgroundColor="LightGray"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnConvertToTextClicked"/>
+            <Editor x:Name="ConversionResult"
+                    VerticalOptions="FillAndExpand"
+                    MaxLength="200"
+                    AutoSize="TextChanges"
+                    BackgroundColor="White"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

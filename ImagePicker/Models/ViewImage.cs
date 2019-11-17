@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace ImagePicker.Models
 {
     [Table ("Images")]
-    public class ViewImage : Image
+    public class ViewImage
     {
         [PrimaryKey, AutoIncrement, Unique]
         public int IDnum { get; set; }

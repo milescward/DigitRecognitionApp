@@ -10,6 +10,8 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\AzureServices\" />
@@ -20,5 +22,7 @@
     <Compile Remove="ViewModels\LocatorViewModel.cs" />
     <Compile Remove="Services\NativeServices\PhotoPickerService.cs" />
     <Compile Remove="Services\Data\SqliteDataService.cs" />
+    <Compile Remove="Services\MockDataStore.cs" />
+    <Compile Remove="Services\IDataStore.cs" />
   </ItemGroup>
 </Project>

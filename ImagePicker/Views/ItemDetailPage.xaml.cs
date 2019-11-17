@@ -3,9 +3,10 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using ImagePicker.ViewModels;
 using System.IO;
-using System.Linq;
 using ImagePicker.Services;
-using ImagePicker.Models;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using ImagePicker.Services.AzureServices;
 
 namespace ImagePicker.Views
 {
@@ -38,7 +39,7 @@ namespace ImagePicker.Views
         {
             try
             {
-                viewModel.VMimageVIData = File.ReadAllBytes(Path);
+                viewModel.VMimageVIData = File.ReadAllBytes(viewModel.VMimagePath);
             }
             catch (Exception ex)
             {
@@ -49,7 +50,7 @@ namespace ImagePicker.Views
 
             
             MessagingCenter.Send(this, "SaveImage", viewModel.VMimage);
-            await Navigation.PopToRootAsync();
+            await Navigation.PopAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
@@ -57,10 +58,8 @@ namespace ImagePicker.Views
             await Navigation.PopToRootAsync();
         }
 
-        async void OnPickPhotoButtonClicked(object sender, EventArgs e)
+        async void OnChooseImageButtonClicked(object sender, EventArgs e)
         {
-            (sender as Button).IsEnabled = false;
-
             string path = await DependencyService
                 .Get<IPhotoPickerService>().ReturnFilePathAsync();
 
@@ -68,14 +67,36 @@ namespace ImagePicker.Views
             {
                 image.Source = ImageSource.FromFile(path);
             }
-
+            image.Rotation = 0;
             viewModel.VMimagePath = path;
 
             (sender as Button).IsEnabled = true;
         }
+
+        private async void OnTakeImageButtonClicked(object sender, EventArgs e)
+        {
+            image.Rotation = 0;
+            (sender as Button).IsEnabled = false;
+
+            var photo = await CrossMedia.Current.TakePhotoAsync
+                (new StoreCameraMediaOptions());
+
+            if (photo != null)
+                image.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+            viewModel.VMimagePath = photo.Path;
+            image.Rotation = 90;
+
+            (sender as Button).IsEnabled = true;
+        }
+
         async void OnConvertToTextClicked(object sender, EventArgs e)
         {
-
+            (sender as Button).IsEnabled = false;
+            var client = ComputerVisionService.GetCVClient();
+            viewModel.VMimageResult = await ComputerVisionService
+                .ExtractUrlLocal(client, viewModel.VMimagePath);
+            ConversionResult.Text = viewModel.VMimageResult;
+            (sender as Button).IsEnabled = true;
         }
     }
 }
