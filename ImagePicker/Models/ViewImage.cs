@@ -9,7 +9,6 @@ namespace ImagePicker.Models
     {
         [PrimaryKey, AutoIncrement, Unique]
         public int IDnum { get; set; }
-        public new ImageSource Source { get; set; }
         public string Path { get; set; }
         public byte[] VIData  { get; set; }
         public string Result { get; set; }

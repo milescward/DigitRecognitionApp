@@ -15,16 +15,6 @@ namespace ImagePicker.ViewModels
             get { return VMimage.IDnum; }
         }
 
-        public ImageSource VMimageSource
-        {
-            get { return VMimage.Source; }
-            set
-            {
-                VMimage.Source = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string VMimagePath
         {
             get { return VMimage.Path; }
@@ -57,7 +47,8 @@ namespace ImagePicker.ViewModels
 
         public ItemDetailViewModel(ViewImage image = null)
         {
-            VMimage = image;
+            IsNewImage = image == null;
+            VMimage = image ?? new ViewImage();
         }
     }
 }

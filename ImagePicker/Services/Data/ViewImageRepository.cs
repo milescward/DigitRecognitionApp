@@ -15,7 +15,7 @@ namespace ImagePicker.Services.Data
         public ViewImageRepository(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableAsync<ViewImage>();
+            _database.CreateTableAsync<ViewImage>().Wait();
         }
 
         public async Task AddImageAsync(ViewImage image)

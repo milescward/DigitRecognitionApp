@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using ImagePicker.Models;
 using ImagePicker.ViewModels;
 using System.IO;
+using System.Linq;
 using ImagePicker.Services;
+using ImagePicker.Models;
 
 namespace ImagePicker.Views
 {
@@ -16,6 +15,9 @@ namespace ImagePicker.Views
     public partial class ItemDetailPage : ContentPage
     {
         ItemDetailViewModel viewModel;
+        public string Path { get; set; }
+        public string Result { get; set; }
+
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
@@ -34,6 +36,18 @@ namespace ImagePicker.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            try
+            {
+                viewModel.VMimageVIData = File.ReadAllBytes(Path);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert
+                    ("Error", "Enter all information or press cancel",
+                    "Cancel", "Ok then");
+            }
+
+            
             MessagingCenter.Send(this, "SaveImage", viewModel.VMimage);
             await Navigation.PopToRootAsync();
         }
@@ -47,13 +61,21 @@ namespace ImagePicker.Views
         {
             (sender as Button).IsEnabled = false;
 
-            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
+            string path = await DependencyService
+                .Get<IPhotoPickerService>().ReturnFilePathAsync();
+
+            if (!string.IsNullOrEmpty(path))
             {
-                image.Source = ImageSource.FromStream(() => stream);
+                image.Source = ImageSource.FromFile(path);
             }
 
+            viewModel.VMimagePath = path;
+
             (sender as Button).IsEnabled = true;
+        }
+        async void OnConvertToTextClicked(object sender, EventArgs e)
+        {
+
         }
     }
 }
