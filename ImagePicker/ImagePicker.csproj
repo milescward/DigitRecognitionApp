@@ -17,6 +17,8 @@
     <Folder Include="Services\AzureServices\" />
     <Folder Include="Services\NativeServices\" />
     <Folder Include="Services\Data\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModels\LocatorViewModel.cs" />
@@ -24,5 +26,8 @@
     <Compile Remove="Services\Data\SqliteDataService.cs" />
     <Compile Remove="Services\MockDataStore.cs" />
     <Compile Remove="Services\IDataStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Assets\styles.css" />
   </ItemGroup>
 </Project>

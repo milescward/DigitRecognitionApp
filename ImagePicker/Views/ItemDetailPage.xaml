@@ -5,38 +5,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ImagePicker.Views.ItemDetailPage"
+             BackgroundImageSource="MNISTNumbers.png"
              Title="{Binding Title}">
-
-<ContentPage.ToolbarItems>
-    <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
-    <ToolbarItem Text="Save" Clicked="Save_Clicked" />
-</ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
     <ScrollView>
-        <StackLayout Spacing="20" Padding="25">
+        <StackLayout Spacing="15"
+                     Padding="15">
             <StackLayout Orientation="Horizontal">
-                <Button Text="Take Photo"
+                <Button StyleClass="primary"
+                        Text="Take Photo"
                         BorderWidth="1"
+                        BackgroundColor="PowderBlue"
+                        TextColor="Black"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        BackgroundColor="LightGray"
                         Clicked="OnTakeImageButtonClicked"/>
-                <Button Text="Pick Photo"
-                        HorizontalOptions="FillAndExpand"
-                        BorderWidth="1"
-                        BackgroundColor="LightGray"
+                <Button Text="Pick Photo" BorderWidth="1" BackgroundColor="PowderBlue"
+                        TextColor="Black" FontSize="Medium" FontAttributes="Bold"
+                        StyleClass="primary" HorizontalOptions="FillAndExpand"
                         Clicked="OnChooseImageButtonClicked"/>
             </StackLayout>
             <Image  x:Name="image"
                     VerticalOptions="FillAndExpand"/>
             <Button Text="Convert to text"
-                    BorderWidth="1"
-                    BackgroundColor="LightGray"
-                    HorizontalOptions="FillAndExpand"
-                    Clicked="OnConvertToTextClicked"/>
+                    StyleClass="primary" BorderWidth="1" BackgroundColor="PowderBlue"
+                    TextColor="Black" FontSize="Medium" FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand" Clicked="OnConvertToTextClicked"/>
             <Editor x:Name="ConversionResult"
                     VerticalOptions="FillAndExpand"
                     MaxLength="200"
-                    AutoSize="TextChanges"
-                    BackgroundColor="White"/>
+                    BackgroundColor="WhiteSmoke"
+                    AutoSize="TextChanges"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

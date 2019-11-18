@@ -6,7 +6,7 @@
             mc:Ignorable="d"
             xmlns:views="clr-namespace:ImagePicker.Views"
             x:Class="ImagePicker.Views.MainPage"
-            BackgroundColor="White">
+            BackgroundImageSource="MNISTNumbers.png">
 
     <MasterDetailPage.Master>
         <views:MenuPage />
