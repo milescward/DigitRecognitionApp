@@ -1,18 +1,22 @@
-﻿using System;
-using ImagePicker.Models;
-using ImagePicker.Services.Data;
-using Xamarin.Forms;
+﻿using ImagePicker.Models;
 
 namespace ImagePicker.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
+        private ViewImage image;
+
         public ViewImage VMimage { get; set; }
         public bool IsNewImage { get; set; }
 
         public int VMimageIDnum
         {
             get { return VMimage.IDnum; }
+            private set
+            {
+                VMimage.IDnum = value;
+                OnPropertyChanged();
+            }
         }
 
         public string VMimagePath
@@ -48,7 +52,19 @@ namespace ImagePicker.ViewModels
         public ItemDetailViewModel(ViewImage image = null)
         {
             IsNewImage = image == null;
-            VMimage = image ?? new ViewImage();
+
+            if (image != null)
+            {
+                VMimage = image;
+                VMimageIDnum = image.IDnum;
+                VMimagePath = image.Path;
+                VMimageResult = image.Result;
+                VMimageVIData = image.VIData;
+            }
+            else
+            {
+                VMimage = new ViewImage();
+            }
         }
     }
 }

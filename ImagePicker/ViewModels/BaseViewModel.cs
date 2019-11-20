@@ -4,9 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
-
-using ImagePicker.Models;
-using ImagePicker.Services;
 using ImagePicker.Services.Data;
 
 namespace ImagePicker.ViewModels

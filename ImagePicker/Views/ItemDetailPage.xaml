@@ -30,6 +30,7 @@
                         Clicked="OnChooseImageButtonClicked"/>
             </StackLayout>
             <Image  x:Name="image"
+                    Source="{Binding viewModel.VMPath}"
                     VerticalOptions="FillAndExpand"/>
             <Button Text="Convert to text"
                     StyleClass="primary" BorderWidth="1" BackgroundColor="PowderBlue"
@@ -37,6 +38,7 @@
                     HorizontalOptions="FillAndExpand" Clicked="OnConvertToTextClicked"/>
             <Editor x:Name="ConversionResult"
                     VerticalOptions="FillAndExpand"
+                    Text="{Binding viewModel.VMResult}"
                     MaxLength="200"
                     BackgroundColor="WhiteSmoke"
                     AutoSize="TextChanges"/>

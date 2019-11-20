@@ -2,7 +2,6 @@
 using SQLite;
 using ImagePicker.Models;
 using System.Collections.Generic;
-using Xamarin.Essentials;
 using System.Threading.Tasks;
 
 namespace ImagePicker.Services.Data
@@ -45,10 +44,10 @@ namespace ImagePicker.Services.Data
             return new List<ViewImage>();
         }
 
-        public async Task<ViewImage> GetImageAsync(int id)
+        public async Task<ViewImage> GetImageAsync(ViewImage VIimage)
         {
             var image = _database.Table<ViewImage>()
-                        .Where(i => i.IDnum == id)
+                        .Where(i => i.IDnum == VIimage.IDnum)
                         .FirstOrDefaultAsync();
 
             return await image;
