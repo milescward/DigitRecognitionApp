@@ -22,10 +22,10 @@ namespace ImagePicker.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as ViewImage;
-            if (item == null)
+            var image = args.SelectedItem as ViewImage;
+            if (image == null)
                 return;
-            var image = await viewModel.VIRepo.GetImageAsync(item);
+            //var image = await viewModel.VIRepo.GetImageAsync(item);
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(image)));
 
             // Manually deselect item.
@@ -34,7 +34,7 @@ namespace ImagePicker.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ItemDetailPage());
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel()));
         }
 
         protected override void OnAppearing()

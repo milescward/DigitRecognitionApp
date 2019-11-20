@@ -7,6 +7,7 @@ using ImagePicker.Services;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using ImagePicker.Services.AzureServices;
+using ImagePicker.Models;
 
 namespace ImagePicker.Views
 {
@@ -15,6 +16,7 @@ namespace ImagePicker.Views
     [DesignTimeVisible (false)]
     public partial class ItemDetailPage : ContentPage
     {
+        public ViewImage Image { get; set; }
         ItemDetailViewModel viewModel;
         public string Path { get; set; }
         public string Result { get; set; }
@@ -50,7 +52,7 @@ namespace ImagePicker.Views
 
             
             MessagingCenter.Send(this, "SaveImage", viewModel.VMimage);
-            await Navigation.PopAsync();
+            await Navigation.PopToRootAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
