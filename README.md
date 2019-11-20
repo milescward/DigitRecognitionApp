@@ -9,13 +9,14 @@
 - [X] Buttons for choosing and taking a new image
 - [X] Output editor
 - [X] Updated UI elements with background
-- [ ] Improve layout aesthetics
-- [ ] Implement group-developed machine learning digit recognition API from class project
+- [X] Improve layout aesthetics
+- [ ] Improve lower editor opacity
 
 ### Data
 - [X] Implement SQLite DB
+- [X] Implement Listview image cell display
 - [ ] Improve Listview for custom list display
-
+- [ ] Implement group-developed machine learning digit recognition API from class project
 
 ### BI
 - [ ] Improve exception handling
