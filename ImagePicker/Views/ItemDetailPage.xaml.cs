@@ -87,7 +87,7 @@ namespace ImagePicker.Views
             }
             catch(Exception exception)
             {
-                await DisplayAlert("Error", "Error occurred", "Cancel");
+                await DisplayAlert("Error", $"{exception.Message}", "Cancel");
             }
 
             (sender as Button).IsEnabled = true;
