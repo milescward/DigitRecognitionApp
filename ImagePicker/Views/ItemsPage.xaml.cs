@@ -25,8 +25,8 @@ namespace ImagePicker.Views
             var image = args.SelectedItem as ViewImage;
             if (image == null)
                 return;
-            //var image = await viewModel.VIRepo.GetImageAsync(item);
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(image)));
+            var ret = await viewModel.VIRepo.GetImageAsync(image);
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(ret)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

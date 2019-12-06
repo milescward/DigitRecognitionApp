@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.IO;
 using System.Threading.Tasks;
 using ImagePicker.Models;
+using ImagePicker.Services;
 using ImagePicker.Services.AzureServices;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -10,8 +11,6 @@ namespace ImagePicker.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        private ViewImage image;
-
         public ViewImage VMimage { get; set; }
         public bool IsNewImage { get; set; }
 
@@ -55,7 +54,27 @@ namespace ImagePicker.ViewModels
             }
         }
 
-        public async Task<ImageSource> TakeImage()
+        public void SaveAsync()
+        {
+            VMimageVIData = File.ReadAllBytes(VMimagePath);
+            MessagingCenter.Send(this, "SaveImage", VMimage);
+        }
+
+        public async Task<ImageSource> ChooseImageAsync()
+        {
+            string path = await DependencyService
+                .Get<IPhotoPickerService>().ReturnFilePathAsync();
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                VMimagePath = path;
+                return ImageSource.FromFile(path);
+            }
+            return null;
+            
+        }
+
+        public async Task<ImageSource> TakeImageAsync()
         {
             var photo = await CrossMedia.Current.TakePhotoAsync
                 (new StoreCameraMediaOptions());
@@ -68,13 +87,13 @@ namespace ImagePicker.ViewModels
             return null;
         }
 
-        public async Task<string> GetResponseString()
+        public async Task<string> GetResponseStringAsync()
         {
             var proj = new AzureCompVisionProj();
             return await proj.ConvertImage(VMimagePath);
         }
 
-        public async Task<string> GetResponseStringCV()
+        public async Task<string> GetResponseStringCVAsync()
         {
             var client = ComputerVisionService.GetCVClient();
             VMimageResult = await ComputerVisionService
@@ -82,9 +101,9 @@ namespace ImagePicker.ViewModels
             return VMimageResult;
         }
 
-        public ItemDetailViewModel(ViewImage image = null)
+        public ItemDetailViewModel(ViewImage image)
         {
-            IsNewImage = image == null;
+            //IsNewImage = image == null;
 
             if (image != null)
             {
@@ -98,6 +117,11 @@ namespace ImagePicker.ViewModels
             {
                 VMimage = new ViewImage();
             }
+        }
+
+        public ItemDetailViewModel()
+        {
+            VMimage = new ViewImage();
         }
     }
 }

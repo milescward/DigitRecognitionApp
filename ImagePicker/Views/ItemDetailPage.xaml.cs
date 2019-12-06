@@ -4,11 +4,7 @@ using Xamarin.Forms;
 using ImagePicker.ViewModels;
 using System.IO;
 using ImagePicker.Services;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
-using ImagePicker.Services.AzureServices;
 using ImagePicker.Models;
-using System.Threading.Tasks;
 
 namespace ImagePicker.Views
 {
@@ -42,18 +38,15 @@ namespace ImagePicker.Views
         {
             try
             {
-                viewModel.VMimageVIData = File.ReadAllBytes(viewModel.VMimagePath);
+                viewModel.SaveAsync();
+                await Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {
-                await DisplayAlert
-                    ("Error", "Enter all information or press cancel",
-                    "Cancel", "Ok then");
+                await DisplayAlert($"Error", $"{ex.Message}", "Cancel");
             }
-
-            
             MessagingCenter.Send(this, "SaveImage", viewModel.VMimage);
-            await Navigation.PopToRootAsync();
+            
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
@@ -63,31 +56,33 @@ namespace ImagePicker.Views
 
         async void OnChooseImageButtonClicked(object sender, EventArgs e)
         {
-            string path = await DependencyService
-                .Get<IPhotoPickerService>().ReturnFilePathAsync();
+            (sender as Button).IsEnabled = false;
 
-            if (!string.IsNullOrEmpty(path))
+            try
             {
-                image.Source = ImageSource.FromFile(path);
+                image.Source = await viewModel.ChooseImageAsync();
+                image.Rotation = 0;
             }
-            image.Rotation = 0;
-            viewModel.VMimagePath = path;
+            catch(Exception except)
+            {
+                await DisplayAlert($"Error", $"{except.Message}", "Cancel");
+            }
 
             (sender as Button).IsEnabled = true;
         }
 
-        private async void OnTakeImageButtonClicked(object sender, EventArgs e)
+        async void OnTakeImageButtonClicked(object sender, EventArgs e)
         {
             image.Rotation = 0;
             (sender as Button).IsEnabled = false;
             try
             {
-                image.Source = await viewModel.TakeImage();
+                image.Source = await viewModel.TakeImageAsync();
                 image.Rotation = 90;
             }
             catch(Exception exception)
             {
-                await DisplayAlert("Error", $"{exception.Message}", "Cancel");
+                await DisplayAlert($"Error", $"{exception.Message}", "Cancel");
             }
 
             (sender as Button).IsEnabled = true;
@@ -97,7 +92,7 @@ namespace ImagePicker.Views
         {
             (sender as Button).IsEnabled = false;
 
-            ConversionResult.Text = await viewModel.GetResponseString();
+            ConversionResult.Text = await viewModel.GetResponseStringAsync();
 
             (sender as Button).IsEnabled = true;
         }
@@ -106,7 +101,7 @@ namespace ImagePicker.Views
         {
             (sender as Button).IsEnabled = false;
 
-            ConversionResult.Text = await viewModel.GetResponseStringCV();
+            ConversionResult.Text = await viewModel.GetResponseStringCVAsync();
 
             (sender as Button).IsEnabled = true;
         }

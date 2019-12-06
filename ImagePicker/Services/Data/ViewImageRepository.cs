@@ -47,7 +47,7 @@ namespace ImagePicker.Services.Data
         public async Task<ViewImage> GetImageAsync(ViewImage VIimage)
         {
             var image = _database.Table<ViewImage>()
-                        .Where(i => i.IDnum == VIimage.IDnum)
+                        .Where(i => i.Path == VIimage.Path)
                         .FirstOrDefaultAsync();
 
             return await image;
