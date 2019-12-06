@@ -32,16 +32,21 @@
             <Image  x:Name="image"
                     Source="{Binding viewModel.VMPath}"
                     VerticalOptions="FillAndExpand"/>
-            <Button Text="Convert to text"
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Azure CV"
                     StyleClass="primary" BorderWidth="1" BackgroundColor="PowderBlue"
                     TextColor="Black" FontSize="Medium" FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand" Clicked="OnConvertToTextClicked"/>
-            <Editor x:Name="ConversionResult"
-                    VerticalOptions="FillAndExpand"
-                    Text="{Binding viewModel.VMResult}"
-                    MaxLength="200"
-                    BackgroundColor="WhiteSmoke"
-                    AutoSize="TextChanges"/>
+                <Button Text="Proj Client"
+                    StyleClass="primary" BorderWidth="1" BackgroundColor="PowderBlue"
+                    TextColor="Black" FontSize="Medium" FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand" Clicked="OnConvertToTextClickedGroup"/>
+            </StackLayout>
+            
+            <Editor x:Name="ConversionResult" VerticalOptions="FillAndExpand"
+                    Text="{Binding viewModel.VMResult}" MaxLength="200"
+                    BackgroundColor="WhiteSmoke" AutoSize="TextChanges"
+                    Opacity=".5"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

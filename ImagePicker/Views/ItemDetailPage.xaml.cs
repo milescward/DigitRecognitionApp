@@ -8,6 +8,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using ImagePicker.Services.AzureServices;
 using ImagePicker.Models;
+using System.Threading.Tasks;
 
 namespace ImagePicker.Views
 {
@@ -79,14 +80,24 @@ namespace ImagePicker.Views
         {
             image.Rotation = 0;
             (sender as Button).IsEnabled = false;
+            try
+            {
+                image.Source = await viewModel.TakeImage();
+                image.Rotation = 90;
+            }
+            catch(Exception exception)
+            {
+                await DisplayAlert("Error", "Error occurred", "Cancel");
+            }
 
-            var photo = await CrossMedia.Current.TakePhotoAsync
-                (new StoreCameraMediaOptions());
+            (sender as Button).IsEnabled = true;
+        }
 
-            if (photo != null)
-                image.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-            viewModel.VMimagePath = photo.Path;
-            image.Rotation = 90;
+        async void OnConvertToTextClickedGroup(object sender, EventArgs e)
+        {
+            (sender as Button).IsEnabled = false;
+
+            ConversionResult.Text = await viewModel.GetResponseString();
 
             (sender as Button).IsEnabled = true;
         }
@@ -94,10 +105,9 @@ namespace ImagePicker.Views
         async void OnConvertToTextClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            var client = ComputerVisionService.GetCVClient();
-            viewModel.VMimageResult = await ComputerVisionService
-                .ExtractUrlLocal(client, viewModel.VMimagePath);
-            ConversionResult.Text = viewModel.VMimageResult;
+
+            ConversionResult.Text = await viewModel.GetResponseStringCV();
+
             (sender as Button).IsEnabled = true;
         }
     }

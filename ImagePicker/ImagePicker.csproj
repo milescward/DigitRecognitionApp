@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991221" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="5.0.0" />
@@ -29,5 +29,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Assets\styles.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.6.0.12\lib\mono\Xamarin.iOS\mscorlib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
