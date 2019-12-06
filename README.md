@@ -11,13 +11,15 @@
 - [X] Output editor
 - [X] Updated UI elements with background
 - [X] Improve layout aesthetics
-- [ ] Improve lower editor opacity
+- [X] Improve lower editor opacity
+- [X] Remove methods from code behind files
 
 ### Data
 - [X] Implement SQLite DB
 - [X] Implement Listview image cell display
 - [ ] Improve Listview for custom list display
-- [ ] Implement group-developed machine learning digit recognition API from class project
+- [X] Implement group-developed machine learning digit recognition API from class project
 
 ### BI
-- [ ] Improve exception handling
+- [X] Improve exception handling
+- [X] Improve MVVM Architecture
