@@ -1,7 +1,8 @@
 # iOS Handwriting Recognition Mobile App 
 ### Built using Xamarin.Forms
 
-![alt text](https://github.com/milescward/DigitRecognitionApp/blob/master/AzureCVAPI.png)
+![alt text](https://github.com/milescward/DigitRecognitionApp/blob/master/Azure%20CV%20screenshot.png)
+![alt text](https://github.com/milescward/DigitRecognitionApp/blob/master/Group%20Model.png)
 
 ## Goals by Layer:
 
