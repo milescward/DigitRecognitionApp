@@ -2,8 +2,6 @@
 using System.ComponentModel;
 using Xamarin.Forms;
 using ImagePicker.ViewModels;
-using System.IO;
-using ImagePicker.Services;
 using ImagePicker.Models;
 
 namespace ImagePicker.Views

@@ -48,7 +48,7 @@ namespace ImagePicker.Services.AzureServices
                 {
                     foreach (Line line in result.Lines)
                     {
-                        sb.Append(line.Text);
+                        sb.Append($"{line.Text} ");
                     }
                 }
                 return sb.ToString();

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using System.Text;
-using Xamarin.Forms.Xaml;
-using System.Threading.Tasks;
 
 using ImagePicker.ViewModels;
-using System.IO;
-using ImagePicker.Services;
 
 namespace ImagePicker.Views
 {

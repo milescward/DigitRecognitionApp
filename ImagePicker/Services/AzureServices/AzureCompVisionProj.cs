@@ -26,7 +26,6 @@ namespace ImagePicker.Services.AzureServices
                     // Construct the URI and add headers.
                     request.RequestUri = new Uri(endpoint);
                     request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                    //request.Headers.Add("Ocp-Apim-Subscription-Key", key_var);
 
                     HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
 
